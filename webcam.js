@@ -22,6 +22,8 @@ if (hasUserMedia()) {
     var success = function(stream) {
         video.src = window.URL.createObjectURL(stream);
 
+        // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+        // See crbug.com/110938.
         video.onloadedmetadata = function(e) {
             console.log("metadata loaded");
         }
