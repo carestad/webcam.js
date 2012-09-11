@@ -49,3 +49,6 @@ if (hasUserMedia()) {
         };
     }, false);
 }
+else {
+    alert("your browser seems to be out of date and does not support the use of navigator.getUserMedia()");
+}
