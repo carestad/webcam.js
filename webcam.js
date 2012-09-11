@@ -42,7 +42,8 @@ if (hasUserMedia()) {
         img.src = canvas.toDataURL('image/png');
         // download picture when clicking on it
         img.onclick = function() {
-            // set filename
+            // set filename for downloading picture
+            // https://developer.mozilla.org/en-US/docs/HTML/Element/a#attr-download
             link.setAttribute('download', 'webcam-'+location.hostname+'-'+Date.now()+'.png');
             link.href = canvas.toDataURL('image/png');
             link.click();
