@@ -20,10 +20,10 @@ if (hasUserMedia()) {
     };
 
     var success = function(stream) {
-        if (navigator.appCodeName == 'Mozilla')
-          video.src = stream;
-        else
+        if (/Chrome/.test(navigator.userAgent))
           video.src = window.URL.createObjectURL(stream);
+        else
+          video.src = stream;
 
         // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
         // See crbug.com/110938.
