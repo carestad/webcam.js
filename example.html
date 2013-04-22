@@ -8,11 +8,13 @@
     <script type="text/javascript" src="https://raw.github.com/carestad/webcam.js/master/webcam.js"></script>
     <script type="text/javascript">
       var success = function(video, canvas, stream) {
+        var link = document.querySelector('a');
+        link.insertBefore(video, link.parentNode);
+
         video.addEventListener('click', function(e) {
           var width = this.videoWidth;
           var height = this.videoHeight;
           var img = document.querySelector('img');
-          var link = document.querySelector('a');
 
           canvas.setAttribute('width', width);
           canvas.setAttribute('height', height);
