@@ -9,7 +9,7 @@
     <script type="text/javascript">
       var success = function(video, canvas, stream) {
         var link = document.querySelector('a');
-        link.insertBefore(video, link.parentNode);
+        link.parentNode.insertBefore(video, link);
 
         video.addEventListener('click', function(e) {
           var width = this.videoWidth;
