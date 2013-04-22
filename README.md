@@ -1,9 +1,11 @@
 webcam.js
+---------
 
 navigator.getUserMedia() userfriendly.
 
-= Usage =
+# Usage
 
+```
  var success = function(video, canvas, stream) {
    video.play();
  }
@@ -14,5 +16,6 @@ navigator.getUserMedia() userfriendly.
    console.log("Browser not supported", e);
  }
  webcam.js(success, failure, notsupported);
+```
 
 Check out webcam.html for a simple example.
