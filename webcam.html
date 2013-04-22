@@ -4,35 +4,36 @@
     <title>WEBC@M TEST</title>
   </head>
   <body>
-    <video></video>
     <a><img /></a>
     <script type="text/javascript" src="webcam.js"></script>
     <script type="text/javascript">
-      var conf = {
-        'video': document.querySelector('video'),
-        'callback': function(video, canvas, stream) {
-          video.addEventListener('click', function(e) {
-            var width = this.videoWidth;
-            var height = this.videoHeight;
-            var img = document.querySelector('img');
-            var link = document.querySelector('a');
+      var success = function(video, canvas, stream) {
+        var link = document.querySelector('a');
+        link.parentNode.insertBefore(video, link);
 
-            canvas.setAttribute('width', width);
-            canvas.setAttribute('height', height);
-            canvas.getContext('2d').drawImage(video, 0, 0);
+        video.addEventListener('click', function(e) {
+          var width = this.videoWidth;
+          var height = this.videoHeight;
+          var img = document.querySelector('img');
 
-            img.setAttribute('src', canvas.toDataURL('image/png'));
-            link.setAttribute('href', canvas.toDataURL('image/png'));
-            link.setAttribute('download', 'webcam.png');
-          });
+          canvas.setAttribute('width', width);
+          canvas.setAttribute('height', height);
+          canvas.getContext('2d').drawImage(video, 0, 0);
 
-          video.play();
-        },
-        'failure': function(e) {
-          console.log("Browser not supported");
-        }
+          img.setAttribute('src', canvas.toDataURL('image/png'));
+          link.setAttribute('href', canvas.toDataURL('image/png'));
+          link.setAttribute('download', 'webcam.png');
+        });
+
+        video.play();
       }
-      webcam(conf);
+      var failure = function(e) {
+        console.log("Stream failed", e);
+      }
+      var notsupported = function() {
+        console.log("Browser not supported");
+      }
+      webcam(success, failure, notsupported);
     </script>
   </body>
 </html>

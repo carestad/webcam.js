@@ -1,17 +1,17 @@
-var webcam = function(conf) {
-  var video = conf.video || false;
+var webcam = function(cbs, cbf, cbns) {
+  var video = document.createElement('video');
   var canvas = document.createElement('canvas');
   var c2d = canvas.getContext('2d') || false;
-  var callback = conf.callback || false;
-  var failure = conf.failure || function(){};
+  var cbf = (typeof failure == 'function') && cbf || function(){};
+  var cbns = (typeof notsupported == 'function') && cbns || function(){};
 
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia || false;
   window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL || false;
 
-  if (video && callback) {
+  if (typeof cbs == 'function' && navigator.getUserMedia && window.URL) {
     var failure = function(e) {
-      failure(e);
+      cbf(e);
     };
 
     var success = function(stream) {
@@ -22,9 +22,12 @@ var webcam = function(conf) {
         video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
       }
 
-      callback(video, canvas, stream);
+      cbs(video, canvas, stream);
     }
 
     navigator.getUserMedia({'video':true}, success, failure);
+  }
+  else {
+    cbns();
   }
 }
