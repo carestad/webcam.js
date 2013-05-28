@@ -2,8 +2,8 @@ var webcam = function(cbs, cbf, cbns) {
   var video = document.createElement('video');
   var canvas = document.createElement('canvas');
   var c2d = canvas.getContext('2d') || false;
-  var cbf = (typeof failure == 'function') && cbf || function(){};
-  var cbns = (typeof notsupported == 'function') && cbns || function(){};
+  var cbf = (typeof cbf == 'function') && cbf || function(){};
+  var cbns = (typeof cbns == 'function') && cbns || function(){};
 
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia || false;
